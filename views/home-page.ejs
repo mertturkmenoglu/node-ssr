@@ -2,20 +2,39 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>
-		<%= pageTitle %>
-	</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>
+        <%= pageTitle %>
+    </title>
 </head>
 
 <body>
-	<% if (showContent) { %>
-		<%= content %>
-			<% } else { %>
-				<div>Cannot show you content</div>
-				<% } %>
+<div class="container">
+    <% if (showContent) { %>
+        <div>
+            <div class="text-center mt-4 display-4 lead">
+                <%= content %>
+            </div>
+            <form method="post" action="/search-user">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp">
+                    <div id="usernameHelp" class="form-text">Vevericka username.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    <% } else { %>
+        <div class="text-center mt-4 display-4 lead">
+            Cannot show you content
+        </div>
+    <% } %>
+</div>
+
 </body>
 
 </html>

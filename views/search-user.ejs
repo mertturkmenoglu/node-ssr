@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+<div class="container">
+    <a href="/" class="text-decoration-none lead text-black-50">
+        Return to Home Page
+    </a>
+    <div class="mt-4 lead">
+        Search: <%= username %>
+    </div>
+    <div class="mt-4">
+        <% if(searchResults.length > 0) { %>
+            <% searchResults.forEach(res => { %>
+                <li class="lead">
+                    <a href="https://vevericka.herokuapp.com/user/<%=res.username%>">
+                        <%= res.username %>
+                    </a>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <div class="lead">No data available</div>
+        <% } %>
+    </div>
+</div>
+
+</body>
+
+</html>
