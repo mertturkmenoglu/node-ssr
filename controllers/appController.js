@@ -18,20 +18,22 @@ exports.getImageUploadPage = (_req, res) => {
 
 exports.postImageUpload = (req, res) => {
 	const image = req.file;
-
-	if (!image) {
-		return res.status(422).render('image-upload', {
-			pageTitle: 'Image Upload',
-			error: 'File is not an image',
-			message: null
-		});
-	}
-
-	return res.status(201).render('image-upload', {
+	let statusCode;
+	const renderOptions = {
 		pageTitle: 'Image Upload',
 		error: null,
-		message: 'File uploaded'
-	})
+		message: null
+	}
+
+	if (!image) {
+		statusCode = 422;
+		renderOptions.error = 'File is not an image';
+	} else {
+		statusCode = 201;
+		renderOptions.message = 'File uploaded';
+	}
+
+	return res.status(statusCode).render('image-upload', renderOptions);
 }
 
 exports.searchUser = async (req, res) => {
