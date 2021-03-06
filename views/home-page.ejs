@@ -14,6 +14,9 @@
 
 <body>
 <div class="container">
+    <a href="/image-upload">
+        <button class="btn btn-primary mt-3">Go to Image Upload</button>
+    </a>
     <% if (showContent) { %>
         <div>
             <div class="text-center mt-4 display-4 lead">
@@ -22,7 +25,8 @@
             <form method="post" action="/search-user">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp">
+                    <input type="text" name="username" class="form-control" id="username"
+                           aria-describedby="usernameHelp">
                     <div id="usernameHelp" class="form-text">Vevericka username.</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>

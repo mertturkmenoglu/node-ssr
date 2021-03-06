@@ -8,6 +8,32 @@ exports.getHomePage = (_req, res) => {
 	});
 }
 
+exports.getImageUploadPage = (_req, res) => {
+	res.render('image-upload', {
+		pageTitle: 'Image Upload',
+		error: null,
+		message: null
+	})
+}
+
+exports.postImageUpload = (req, res) => {
+	const image = req.file;
+
+	if (!image) {
+		return res.status(422).render('image-upload', {
+			pageTitle: 'Image Upload',
+			error: 'File is not an image',
+			message: null
+		});
+	}
+
+	return res.status(201).render('image-upload', {
+		pageTitle: 'Image Upload',
+		error: null,
+		message: 'File uploaded'
+	})
+}
+
 exports.searchUser = async (req, res) => {
 	const query = req.body.username;
 	const BASE = "https://user-info-service.herokuapp.com";
