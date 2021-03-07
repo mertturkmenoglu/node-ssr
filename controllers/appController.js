@@ -63,18 +63,29 @@ exports.searchUser = async (req, res) => {
 }
 
 exports.getUploadedImagesPage = (req, res) => {
+	const page = +req.query.page || 1;
+	const IMG_PER_PAGE = 2;
+
 	const p = path.join(__dirname, '..', 'images');
 	const renderOptions = {
 		path: '/uploaded-images',
 		pageTitle: 'Uploaded Images',
+		page: page,
+		prevPage: (page !== 1) ? page-1 : null,
+		nextPage: null,
 		images: []
 	}
 
 	fs.readdir(p, (err, files) => {
 		if (!err) {
-			renderOptions.images = files
+			const startIndex = (page-1) * IMG_PER_PAGE
+			const allImages = files
 				.filter(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg'))
-				.map(f => `images/${f}`);
+				.sort();
+
+			const totalImageCount = allImages.length;
+			renderOptions.images = allImages.slice(startIndex, startIndex + IMG_PER_PAGE).map(f => `images/${f}`);
+			renderOptions.nextPage = (totalImageCount / IMG_PER_PAGE > page) ? page + 1 : null
 		}
 		res.render('uploaded-images', renderOptions);
 	});
