@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const app = express();
 const appRoutes = require('./routes/appRoutes');
 
@@ -32,6 +34,8 @@ app.use(
 )
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(helmet());
+app.use(morgan('[:date[web]] || :method :url  || Status: :status || Response time: :response-time ms'));
 app.use(appRoutes);
 
 const PORT = process.env.PORT || 5000;

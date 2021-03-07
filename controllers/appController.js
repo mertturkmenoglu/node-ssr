@@ -1,4 +1,6 @@
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
 exports.getHomePage = (_req, res) => {
 	res.render('home-page', {
@@ -58,4 +60,22 @@ exports.searchUser = async (req, res) => {
 	}
 
 	res.render('search-user', renderOptions);
+}
+
+exports.getUploadedImagesPage = (req, res) => {
+	const p = path.join(__dirname, '..', 'images');
+	const renderOptions = {
+		path: '/uploaded-images',
+		pageTitle: 'Uploaded Images',
+		images: []
+	}
+
+	fs.readdir(p, (err, files) => {
+		if (!err) {
+			renderOptions.images = files
+				.filter(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg'))
+				.map(f => `images/${f}`);
+		}
+		res.render('uploaded-images', renderOptions);
+	});
 }
