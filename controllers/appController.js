@@ -3,6 +3,7 @@ const axios = require('axios');
 exports.getHomePage = (_req, res) => {
 	res.render('home-page', {
 		pageTitle: 'Home Page',
+		path: '/',
 		content: 'Node SSR - Vevericka User Search',
 		showContent: true
 	});
@@ -10,6 +11,7 @@ exports.getHomePage = (_req, res) => {
 
 exports.getImageUploadPage = (_req, res) => {
 	res.render('image-upload', {
+		path: '/image-upload',
 		pageTitle: 'Image Upload',
 		error: null,
 		message: null
@@ -21,6 +23,7 @@ exports.postImageUpload = (req, res) => {
 	let statusCode;
 	const renderOptions = {
 		pageTitle: 'Image Upload',
+		path: '/image-upload',
 		error: null,
 		message: null
 	}
@@ -44,6 +47,7 @@ exports.searchUser = async (req, res) => {
 	const data = response.data;
 	const renderOptions = {
 		pageTitle: 'Search',
+		path: '/search-user',
 		username: query,
 	}
 

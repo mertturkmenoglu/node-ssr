@@ -13,13 +13,11 @@
 </head>
 
 <body>
+<%- include('./includes/nav-bar.ejs') %>
 <div class="container">
-    <a href="/image-upload">
-        <button class="btn btn-primary mt-3">Go to Image Upload</button>
-    </a>
     <% if (showContent) { %>
         <div>
-            <div class="text-center mt-4 display-4 lead">
+            <div class="text-center mt-4 display-5 lead">
                 <%= content %>
             </div>
             <form method="post" action="/search-user">
