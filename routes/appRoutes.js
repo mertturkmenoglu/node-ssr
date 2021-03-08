@@ -7,5 +7,6 @@ router.post('/search-user', appController.searchUser);
 router.get('/image-upload', appController.getImageUploadPage);
 router.post('/image-upload', appController.postImageUpload);
 router.get('/uploaded-images', appController.getUploadedImagesPage);
+router.get('*', appController.getNotFoundPage);
 
 module.exports = router;

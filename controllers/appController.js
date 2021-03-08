@@ -90,3 +90,12 @@ exports.getUploadedImagesPage = (req, res) => {
 		res.render('uploaded-images', renderOptions);
 	});
 }
+
+exports.getNotFoundPage = (req, res) => {
+	const renderOptions = {
+		path: req.originalUrl,
+		pageTitle: 'Not found'
+	}
+
+	res.status(404).render('not-found', renderOptions);
+}
