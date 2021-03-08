@@ -84,11 +84,29 @@ exports.getUploadedImagesPage = (req, res) => {
 				.sort();
 
 			const totalImageCount = allImages.length;
-			renderOptions.images = allImages.slice(startIndex, startIndex + IMG_PER_PAGE).map(f => `images/${f}`);
+			renderOptions.images = allImages
+				.slice(startIndex, startIndex + IMG_PER_PAGE)
+				.map(f => ({
+					imageName: f,
+					imagePath: `images/${f}`
+				}));
 			renderOptions.nextPage = (totalImageCount / IMG_PER_PAGE > page) ? page + 1 : null
 		}
 		res.render('uploaded-images', renderOptions);
 	});
+}
+
+exports.getImageDetailPage = (req, res) => {
+	const image = req.params.image;
+	console.log('Image detail', image)
+	const renderOptions = {
+		path: '/image-detail/images',
+		pageTitle: `Image - ${image}`,
+		imageName: image,
+		imagePath: `images/${image}`
+	}
+
+	res.render('image-detail', renderOptions);
 }
 
 exports.getNotFoundPage = (req, res) => {

@@ -3,6 +3,7 @@ const path = require('path');
 const multer = require('multer');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const appRoutes = require('./routes/appRoutes');
 
@@ -11,7 +12,7 @@ const fileStorage = multer.diskStorage({
 		cb(null, 'images');
 	},
 	filename: (req, file, cb) => {
-		cb(null, Math.random().toString() + '_' + file.originalname);
+		cb(null, uuidv4() + '_' + file.originalname);
 	}
 });
 

@@ -10,6 +10,13 @@
     <title>
         <%= pageTitle %>
     </title>
+    <style>
+        .fit-image {
+
+            object-fit: cover;
+            height: 200px;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,26 +25,29 @@
     <div class="mt-4 mb-2">
         <% if(images.length > 0) { %>
             <% images.forEach(image => { %>
-            <li class="lead mb-2">
-                <img src="<%= image %>" class="img-fluid" alt="...">
-            </li>
+                <li class="lead mb-5">
+                    <a href="/image-detail/<%= image.imageName %>">
+                        <img src="<%= image.imagePath %>" class="fit-image img-thumbnail" alt="...">
+                    </a>
+                </li>
             <% }); %>
+            <div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <%= prevPage ? 'active' : 'disabled' %>">
+                            <a class="page-link" href="/uploaded-images?page=<%= prevPage %>">Previous</a>
+                        </li>
+                        <li class="page-item <%= nextPage ? 'active' : 'disabled' %>">
+                            <a class="page-link" href="/uploaded-images?page=<%= nextPage %>">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         <% } else { %>
-            <div class="lead">No data available</div>
+            <div class="lead text-center">No data available</div>
         <% } %>
     </div>
-    <div>
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item <%= prevPage ? 'active' : 'disabled' %>">
-                    <a class="page-link" href="/uploaded-images?page=<%= prevPage %>">Previous</a>
-                </li>
-                <li class="page-item <%= nextPage ? 'active' : 'disabled' %>">
-                    <a class="page-link" href="/uploaded-images?page=<%= nextPage %>">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+
 </div>
 
 </body>
